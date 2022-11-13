@@ -39,6 +39,7 @@ jobs:
 
       - name: Install Drupal using existing configuration
         run: |
+          composer install
           ./vendor/bin/drush site-install --existing-config
           # Flush caches and re-run config:import to make sure everything is up-to-date.
           ./vendor/bin/drush cr && ./drush/bin/config:import -y
