@@ -42,7 +42,7 @@ jobs:
           composer install
           ./vendor/bin/drush site-install --existing-config
           # Flush caches and re-run config:import to make sure everything is up-to-date.
-          ./vendor/bin/drush cr && ./drush/bin/config:import -y
+          ./vendor/bin/drush cr && ./vendor/bin/drush config:import -y
 
       - name: Update packages
         run: |
