@@ -1,0 +1,67 @@
+name: Update Drupal
+on:
+  # Workflow_dispatch will allow you to run this manually from Actions tab.
+  # See https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows for
+  # available triggers.
+  workflow_dispatch:
+jobs:
+  update:
+    runs-on: 'ubuntu-20.04'
+    services:
+      db:
+        image: mariadb:10.9
+        env:
+          MYSQL_USER: drupal
+          MYSQL_PASSWORD: drupal
+          MYSQL_DATABASE: drupal
+          MYSQL_ROOT_PASSWORD: drupal
+        ports:
+          - 3306:3306
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ['8.1']
+        include:
+          - php-versions: '8.1'
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: gd, pdo_mysql
+
+      - name: Update composer
+        run: composer --verbose self-update --stable
+
+      - name: Install Drupal using existing configuration
+        run: |
+          ./vendor/bin/drush site-install --existing-config
+          # Flush caches and re-run config:import to make sure everything is up-to-date.
+          ./vendor/bin/drush cr && ./drush/bin/config:import -y
+
+      - name: Update packages
+        run: |
+          # You can update whatever you want here. We update only update commerce
+          # to keep things simple.
+          composer update drupal/commerce
+          # Run update hooks.
+          ./vendor/bin/drush updb
+          # Export any configuration changes done by update hooks.
+          ./vendor/bin/drush config:export
+
+        # This will create a pull request of changes done in "Update packages" step.
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          committer: GitHub <noreply@github.com>
+          author: actions-bot <actions-bot@users.noreply.github.com>
+          commit-message: Update configuration
+          title: Automatic update
+          body: |
+            - Updated active configuration.
+          branch: update-configuration
+
