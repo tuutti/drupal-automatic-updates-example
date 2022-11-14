@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff5ae823a167a1134458ef66ce8c4ac7",
+    "content-hash": "2522d962a62a9f83d338a8579f9fcc52",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1554,30 +1554,33 @@
         },
         {
             "name": "drupal/commerce",
-            "version": "2.18.0",
+            "version": "2.32.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/commerce.git",
-                "reference": "8.x-2.18"
+                "reference": "8.x-2.32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce-8.x-2.18.zip",
-                "reference": "8.x-2.18",
-                "shasum": "26ae3afbcebb3f48cab3e584dfd57ad07d420189"
+                "url": "https://ftp.drupal.org/files/projects/commerce-8.x-2.32.zip",
+                "reference": "8.x-2.32",
+                "shasum": "21e19c8751ed65447468cf72ff8401e3e461e954"
             },
             "require": {
                 "commerceguys/intl": "^1.0.0",
                 "drupal/address": "^1.7",
-                "drupal/core": "^8.7.7 || ^9",
-                "drupal/entity": "^1.0-rc2",
+                "drupal/core": "^9.3 || ^10",
+                "drupal/entity": "^1.0",
                 "drupal/entity_reference_revisions": "~1.0",
-                "drupal/inline_entity_form": "^1.0-rc1",
-                "drupal/profile": "^1.0",
-                "drupal/state_machine": "^1.0-rc1",
-                "drupal/token": "^1.0",
+                "drupal/inline_entity_form": "^1.0@RC",
+                "drupal/profile": "^1.2",
+                "drupal/state_machine": "^1.5",
+                "drupal/token": "^1.7",
                 "ext-bcmath": "*",
-                "php": ">=7.0.8"
+                "php": "^7.3 || ^8.0"
+            },
+            "conflict": {
+                "drupal/commerce_shipping": "<2.1"
             },
             "require-dev": {
                 "drupal/commerce_cart": "*",
@@ -1587,16 +1590,17 @@
                 "drupal/commerce_price": "*",
                 "drupal/commerce_product": "*",
                 "drupal/commerce_store": "*",
+                "drupal/entity_print": "^2.2",
                 "drupal/entity_reference_revisions": "*",
-                "drupal/mailsystem": "^4.1",
+                "drupal/mailsystem": "^4.3",
                 "drupal/profile": "*",
                 "drupal/state_machine": "*"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.18",
-                    "datestamp": "1632333931",
+                    "version": "8.x-2.32",
+                    "datestamp": "1666184508",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -1605,7 +1609,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -1630,7 +1634,7 @@
                 }
             ],
             "description": "Drupal Commerce is a flexible eCommerce solution.",
-            "homepage": "http://drupal.org/project/commerce",
+            "homepage": "https://drupal.org/project/commerce",
             "support": {
                 "source": "https://git.drupalcode.org/project/commerce"
             }
