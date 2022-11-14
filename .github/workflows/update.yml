@@ -46,7 +46,7 @@ jobs:
 
       - name: Update packages
         run: |
-          # You can update whatever you want here. We update only update commerce
+          # You can update whatever you want here. We only update commerce
           # to keep things simple.
           composer update drupal/commerce
           # Run update hooks.
@@ -54,7 +54,7 @@ jobs:
           # Export any configuration changes done by update hooks.
           ./vendor/bin/drush config:export
 
-        # This will create a pull request of changes done in "Update packages" step.
+        # Create a pull request for changes done in previous step.
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
