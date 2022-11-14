@@ -19,19 +19,14 @@ jobs:
           - 3306:3306
     strategy:
       fail-fast: false
-      matrix:
-        php-versions: ['8.1']
-        include:
-          - php-versions: '8.1'
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
+          php-version: '8.1'
           extensions: gd, pdo_mysql
 
       - name: Update composer
